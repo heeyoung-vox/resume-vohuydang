@@ -3,9 +3,10 @@ import { ProjectGrid } from './components/ProjectGrid';
 import { SkillOrbit } from './components/SkillOrbit';
 import { BentoCard } from './components/BentoCard';
 import { personalInfo, education } from './data';
-import { Moon, Sun, GraduationCap, Mail, Link, MapPin } from 'lucide-react';
+import { Moon, Sun, GraduationCap, Mail, Link, MapPin, Phone } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ExperienceCard } from './components/ExperienceCard';
+import { CertificatesCard } from './components/CertificatesCard';
 
 function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -63,6 +64,12 @@ function MainLayout() {
                 <Mail size={18} />
                 Contact Me
               </a>
+              {personalInfo.phone && (
+                <a href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-muted text-foreground font-medium hover:bg-border transition-colors">
+                  <Phone size={18} />
+                  {personalInfo.phone}
+                </a>
+              )}
               <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-muted text-foreground font-medium hover:bg-border transition-colors">
                 <Link size={18} />
                 GitHub
@@ -104,12 +111,21 @@ function MainLayout() {
           <ExperienceCard />
         </div>
 
+        {/* Skills & Certificates Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+          <div className="lg:col-span-2">
+            <SkillOrbit />
+          </div>
+          <div className="lg:col-span-1">
+            <CertificatesCard />
+          </div>
+        </div>
+
         {/* Project Grid */}
         <ProjectGrid />
 
         {/* Bottom Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 mb-20">
-          <SkillOrbit />
+        <div className="grid grid-cols-1 gap-6 mt-12 mb-20">
           
           <BentoCard delay={0.3} className="flex flex-col justify-center items-center text-center p-12 bg-gradient-to-tl from-purple-500/10 to-primary/5">
             <h3 className="text-2xl font-bold mb-4">Ready to build something amazing?</h3>

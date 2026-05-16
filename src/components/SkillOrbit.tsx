@@ -17,7 +17,7 @@ export const SkillOrbit: React.FC = () => {
 
   return (
     <BentoCard className="flex flex-col h-full bg-gradient-to-br from-card to-card/50" delay={0.2}>
-      <h3 className="text-2xl font-bold mb-6">Technical Arsenal</h3>
+      <h3 className="text-2xl font-bold mb-6">Skills</h3>
       
       <div className="flex-grow flex flex-col gap-6 justify-center">
         {Object.entries(groupedSkills).map(([category, catSkills]) => (

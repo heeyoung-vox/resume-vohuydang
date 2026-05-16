@@ -54,5 +54,6 @@ export const personalInfo = {
   name: 'Võ Huy Dâng',
   title: 'Fullstack Developer',
   email: 'vohuydang001@gmail.com',
+  phone: '0918819631',
   about: 'Fullstack Developer with expertise in ASP.NET Core, React, and building scalable data-driven web applications. Proven experience in integrating AI solutions and migrating complex frontend architectures.',
 };
