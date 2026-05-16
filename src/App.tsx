@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { ProjectGrid } from './components/ProjectGrid';
 import { SkillOrbit } from './components/SkillOrbit';
 import { BentoCard } from './components/BentoCard';
 import { personalInfo, education } from './data';
-import { Moon, Sun, GraduationCap, Mail, Link, MapPin, Phone } from 'lucide-react';
+import { Moon, Sun, GraduationCap, Mail, Link, MapPin, Phone, Copy, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ExperienceCard } from './components/ExperienceCard';
 import { CertificatesCard } from './components/CertificatesCard';
@@ -44,6 +45,15 @@ function Header() {
 }
 
 function MainLayout() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(personalInfo.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -60,24 +70,35 @@ function MainLayout() {
               {personalInfo.about}
             </p>
             <div className="flex flex-wrap gap-4">
-              <a href={`mailto:${personalInfo.email}`} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
-                <Mail size={18} />
-                Contact Me
-              </a>
+              <button 
+                onClick={handleCopyEmail}
+                className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors group"
+              >
+                <span className={`absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 bg-foreground text-background text-xs font-bold rounded-md whitespace-nowrap transition-all duration-200 pointer-events-none ${copied ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0'}`}>
+                  {copied ? 'Copied to clipboard!' : 'Click to copy'}
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 border-4 border-transparent border-t-foreground"></span>
+                </span>
+                {copied ? <Check size={18} /> : <Copy size={18} />}
+                {personalInfo.email}
+              </button>
               {personalInfo.phone && (
                 <a href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-muted text-foreground font-medium hover:bg-border transition-colors">
                   <Phone size={18} />
                   {personalInfo.phone}
                 </a>
               )}
-              <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-muted text-foreground font-medium hover:bg-border transition-colors">
-                <Link size={18} />
-                GitHub
-              </a>
-              <a href="#" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-muted text-foreground font-medium hover:bg-border transition-colors">
-                <Link size={18} />
-                LinkedIn
-              </a>
+              {personalInfo.github && (
+                <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-muted text-foreground font-medium hover:bg-border transition-colors">
+                  <Link size={18} />
+                  GitHub
+                </a>
+              )}
+              {personalInfo.linkedin && (
+                <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-muted text-foreground font-medium hover:bg-border transition-colors">
+                  <Link size={18} />
+                  LinkedIn
+                </a>
+              )}
             </div>
           </BentoCard>
 

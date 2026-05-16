@@ -55,5 +55,7 @@ export const personalInfo = {
   title: 'Fullstack Developer',
   email: 'vohuydang001@gmail.com',
   phone: '0918819631',
+  github: 'https://github.com/heeyoung-vox',
+  linkedin: 'https://www.linkedin.com/in/vohuydang/',
   about: 'Fullstack Developer with expertise in ASP.NET Core, React, and building scalable data-driven web applications. Proven experience in integrating AI solutions and migrating complex frontend architectures.',
 };
